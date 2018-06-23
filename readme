@@ -12,4 +12,5 @@ $ git config --global user.email "email@example.com"
 	git status
 5、查看当前工作区和已经提交的有什么不同
 	git diff
-
+6、查看git的提交（commit）记录
+	git log
