@@ -46,6 +46,20 @@ $ git config --global user.email "email@example.com"
 2、登陆GitHub，打开“Account settings”，“SSH Keys”页面：
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容，然后点“Add Key”，你就应该看到已经添加的Key。
 
+3、情形1：我现在已经在本地创建了git仓库，需要在github上创建一个仓库并进行远程的同步。
+	首先登录github，找到“new repository”，点击并填入需要创建的仓库名字，创建一个空的仓库。然后执行以下两条指令使本地仓库和远程仓库关联：
+	git remote add origin git@github.com:ddkity/learngit.git
+	git push -u origin master（首次使用这个指令需要加-u，以后再push的时候就不需要加-u了）
+	SSH警告
+当你第一次使用Git的clone或者push命令连接GitHub时，会得到一个警告：
+The authenticity of host 'github.com (xx.xx.xx.xx)' can't be established.
+RSA key fingerprint is xx.xx.xx.xx.xx.
+Are you sure you want to continue connecting (yes/no)?
+这是因为Git使用SSH连接，而SSH连接在第一次验证GitHub服务器的Key时，需要你确认GitHub的Key的指纹信息是否真的来自GitHub的服务器，输入yes回车即可。
+Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一个信任列表里了：
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
+这个警告只会出现一次，后面的操作就不会有任何警告了。
+
 
 
 
