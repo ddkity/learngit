@@ -20,3 +20,9 @@ $ git config --global user.email "email@example.com"
 	回退上100个版本：git reset --hard HEAD~100
 	回退到某个commit id的版本：git reset --hard d55a3a77
 8、在使用git reset的命令中退回到了比较旧的版本了，现在又想回到比较新的版本，但是又不记得新的commit id怎么办？使用git reflog命令，这个命令用来记录每一次的commit信息，可以查看到commit id。找到id之后就可以使用：git reset --hard + [commit id]来回退到指定的版本了。
+
+9、git撤销修改的方法：git checkout -- readme
+	意思就是，把readme文件在工作区的修改全部撤销，这里有两种情况：
+	一种是readme自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+	另一种是readme已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态（即是回到git add之前的状态，此时的readme已经修改过了，和上次的commit的内容还是不一样的，可以再次的add和commit）。
+	总之，就是让这个文件回到最近一次git commit或git add时的状态。
