@@ -68,4 +68,18 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 5、.gitignore文件的设置，这个文件需要放在与.git目录同级下，然后设置忽略的文件的规则，忽略目录为：（例如）SI/。另外如果需要添加目录下所有的文件可以使用git add -A
 
 
+*********************************************************
+	git分支管理
+*********************************************************
+1、创建分支然后切换到创建的分支
+	git checkout -b mydev,此命令相当于以下两条命令：
+	git branch mydev
+	git checkout mydev
+2、使用git branch命令查看目前有多少分支，目前工作区处于哪个分支，当前分支前面会标一个*号
+3、切换回主分支：git checkout master
+4、把mydev分支合并到主分支：git merge mydev
+5、删除分支：git branch -d mydev
+
+
+
 
