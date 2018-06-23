@@ -1,7 +1,9 @@
 安装完成了git之后，需要进行最后一步的设置：
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
-
+*********************************************************
+	git在本地上的操作
+*********************************************************
 1、初始化仓库
 	git init
 2、把文件添加到仓库
@@ -32,3 +34,19 @@ $ git config --global user.email "email@example.com"
 10、删除文件，有两种情况：
 	1、你真的是要把text.txt文件删除。此时你已经把一个text.txt文件add并commit了，你在本地删除text.txt文件之后，再使用git rm text.txt,然后git commit，就能把text.txt文件彻底的删除了。
 	2、其实你是不想删除text.txt这个文件的，那么使用git checkout -- test.txt，其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。但是要小心，这个操作你只能恢复文件到版本库中最新版本，你会丢失最近一次提交后你修改的内容。
+
+
+
+*********************************************************
+	git远程仓库操作
+*********************************************************
+1、如果要连接到远程仓库，需要获取SSH KEY，创建ssh key的方法如下:创建的key在用户主目录下的.ssh目录，有两个文件id_rsa和id_rsa.pub。
+	ssh-keygen -t rsa -C "youremail@example.com"，你需要把邮件地址换成你自己本地的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。（如果是Windows下打开Git Bash这个软件进入命令行模式）。
+
+2、登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容，然后点“Add Key”，你就应该看到已经添加的Key。
+
+
+
+
+
