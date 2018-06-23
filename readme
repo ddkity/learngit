@@ -80,6 +80,6 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 4、把mydev分支合并到主分支：git merge mydev
 5、删除分支：git branch -d mydev
 
-测试分支和测试分支
+测试分支 和 测试分支
 
 
