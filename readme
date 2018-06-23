@@ -1,0 +1,6 @@
+1、初始化仓库
+	git init
+2、把文件添加到仓库
+	git add
+3、把文件提交到仓库
+	git commit
