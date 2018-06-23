@@ -60,6 +60,11 @@ Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一�
 Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 这个警告只会出现一次，后面的操作就不会有任何警告了。
 
+4、情形2：现在本地上是没有本地的仓库的，是创建一个新的工程，那么可以先创建远程仓库，然后从远程仓库克隆到本地，再在本地添加文件。
+	登录github，创建一个远程仓库，创建的时候勾选我们勾选“Initialize this repository with a README”，这样GitHub会自动为我们创建一个README.md文件。创建完毕后，可以看到README.md文件（情形1的情况是不需要勾选的）。远程仓库准备好了之后，下一步是克隆一个本地的仓库。
+	git clone git@github.com:ddkity/Roomba1.4.3.git
+	接下来就可以往本地的仓库添加文件啊，工程啊之类的东西然后推送到远程仓库了
+
 
 
 
