@@ -29,3 +29,6 @@ $ git config --global user.email "email@example.com"
 
 	git checkout -- file命令中的--很重要，没有--，就变成了“切换到另一个分支”的命令，我们在后面的分支管理中会再次遇到git checkout命令。
 
+10、删除文件，有两种情况：
+	1、你真的是要把text.txt文件删除。此时你已经把一个text.txt文件add并commit了，你在本地删除text.txt文件之后，再使用git rm text.txt,然后git commit，就能把text.txt文件彻底的删除了。
+	2、其实你是不想删除text.txt这个文件的，那么使用git checkout -- test.txt，其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。但是要小心，这个操作你只能恢复文件到版本库中最新版本，你会丢失最近一次提交后你修改的内容。
