@@ -19,4 +19,4 @@ $ git config --global user.email "email@example.com"
 	回退上上一个版本：git reset --hard HEAD^^
 	回退上100个版本：git reset --hard HEAD~100
 	回退到某个commit id的版本：git reset --hard d55a3a77
-8、在使用git reset的命令中退回到了比较旧的版本了，现在又想回到比较新的版本，但是又不记得新的commit id怎么办？使用git relog命令，这个命令用来记录每一次的commit信息，可以查看到commit id。找到id之后就可以使用：git reset --hard + [commit id]来回退到指定的版本了。
+8、在使用git reset的命令中退回到了比较旧的版本了，现在又想回到比较新的版本，但是又不记得新的commit id怎么办？使用git reflog命令，这个命令用来记录每一次的commit信息，可以查看到commit id。找到id之后就可以使用：git reset --hard + [commit id]来回退到指定的版本了。
