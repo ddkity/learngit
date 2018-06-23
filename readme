@@ -1,6 +1,15 @@
+安装完成了git之后，需要进行最后一步的设置：
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
 1、初始化仓库
 	git init
 2、把文件添加到仓库
 	git add
 3、把文件提交到仓库
 	git commit
+4、查看仓库的当前状态
+	git status
+5、查看当前工作区和已经提交的有什么不同
+	git diff
+
