@@ -80,7 +80,8 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 4、把mydev分支合并到主分支：git merge mydev
 5、删除分支：git branch -d mydev
 
-测试分支 和 测试分支
+6、分支冲突：在分支上修改内容并add和commit之后，把分支切换到master上，然后同样的add和commit后，提交当分支上的同一个文件的内容与主分支上的内容不一样的时候，合并分支会产生冲突而导致无法合并。这个时候，需要手动修改有冲突的文件，然后在master上重新的add和commit之后再进行合并（git merge mydev）。
+	另外，使用git log --graph命令可以看到分支合并图。
 
 
 
