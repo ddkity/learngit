@@ -84,4 +84,26 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 	另外，使用git log --graph命令可以看到分支合并图。
 
 
+7、假如A电脑上创建了dev1分支，修改了文件并add、commit和push了，那么远程主机上面的代码应该是最新的了。然后在A电脑push前同时在B电脑上已经创建了dev2分支，然后B电脑也依次add、commit和push，此时push的时候就会报错：{To git@github.com:ddkity/testgit.git
+ ! [rejected]        master -> master (fetch first)
+error: 无法推送一些引用到 'git@github.com:ddkity/testgit.git'
+提示：更新被拒绝，因为远程仓库包含您本地尚不存在的提交。这通常是因为另外
+提示：一个仓库已向该引用进行了推送。再次推送前，您可能需要先整合远程变更
+提示：（如 'git pull ...'）。
+提示：详见 'git push --help' 中的 'Note about fast-forwards' 小节。}，原因是：您的分支领先 'origin/master' 共 1 个提交。所以要在B电脑上push代码，必须先要pull远程的仓库。git pull origin master。然后由于A电脑和B电脑修改的是同一个文件，会有导致合并冲突：{remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+来自 github.com:ddkity/testgit
+ * branch            master     -> FETCH_HEAD
+   2b0de44..99979c1  master     -> origin/master
+自动合并 testgitmerga.txt
+冲突（内容）：合并冲突于 testgitmerga.txt
+自动合并失败，修正冲突然后提交修正的结果。}，此时就应该根据提示打开冲突的文件，冲突文件显示格式如下，{<<<<<<< HEAD
+5、这是在ubuntu下的mydev3分支
+
+=======
+5、这是在windows下的mydev2分支
+>>>>>>> 99979c1a63e9b9d4034a6a7a52b1f42054d6c765}，修改冲突为，可以修改例如这样的：{5、这是在ubuntu下的mydev3分支
+5、这是在windows下的mydev2分支}，然后再add、commit和push。
 
