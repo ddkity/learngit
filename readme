@@ -127,6 +127,56 @@ Unpacking objects: 100% (3/3), done.
 		也可以使用git status进行多次隐藏工作现场，然后使用git stash list查看有多少个隐藏的现场，然后使用git stash apply stash@{0}指定恢复到哪一个现场。最后使用git stash drop命令来删除不需要的现场
 
 
+2、feature分支：用于当创建了一个分支了，并开发完成了分支进行add和commit了。下一步合并分支即可大工告成。但是现在突然不想合并了，必须要销毁分支，使用git branch -D feature-vulcan
+	git checkout -b feature-vulcan（创建分支并进入）
+	git add vulcan.py（添加分支）
+	git commit -m "add feature vulcan"（提交分支）
+	git checkout dev（切换回到父分支）
+	git branch -d feature-vulcan（销毁分支，提示这个分支没有合并，不能销毁。）
+	git branch -D feature-vulcan（需要使用-D的参数来销毁）
 
+3、查看远程仓库的信息：
+	git remote -v
+
+4、推送分支到远程仓库：
+	推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：
+	$ git push origin master
+	如果要推送其他分支，比如dev，就改成：
+	$ git push origin dev
+	但是，并不是一定要把本地分支往远程推送，那么，哪些分支需要推送，哪些不需要呢？
+	master分支是主分支，因此要时刻与远程同步；
+	dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+	bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
+	feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
+	总之，就是在Git中，分支完全可以在本地自己藏着玩，是否推送，视你的心情而定！
+
+5、多人协作：A电脑在本地创建了分支并add、commit、push到了远程仓库：git push origin dev4，此时远程仓库是有两个分支的（master和dev4）。B电脑clone这个工程，git clone git@github.com:ddkity/testgit.git，默认情况下，克隆的这个工程只有master分支，并不会看到dev4的分支。现在B电脑要在dev4上开发，就必须创建远程origin的dev4分支到本地：git checkout -b dev4 origin/dev4。
+现在，B电脑就可以在dev4上继续修改，然后，时不时地把dev4分支push到远程，
+	git add env.txt
+	git commit -m "add env"
+	git push origin dev4
+
+此时A电脑也要修改Dev4的文件并push到远程仓库，
+	git add env.txt
+	git commit -m "add new env"
+	git push origin dev（推送失败，提示有冲突）
+	此时需要先用git pull把最新的提交从origin/dev抓下来，然后，在本地合并，解决冲突，再推送。
+	如果git pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：
+	$ git branch --set-upstream-to=origin/dev4 dev4
+	最后再git pull成功
+
+*********************************************************
+	git bug分支管理
+*********************************************************
+1、切换到对应的分支，然后创建标签：git tag <name>（这个标签默认打在最新的commit上的），也可以打到某一次的commit上，但是需要知道那次的commit id，比如：git tag v0.9 f52c633（第三个参数的标签名，第四个参数是commit id）。
+	使用git tag可以查看有多少个标签。
+	使用git show <tagname>可以查看某个标签的信息。
+	还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
+	$ git tag -a v0.1 -m "version 0.1 released" 1094adb
+
+	使用git tag -d v0.1删除标签
+	推送某个标签到远程：git push origin <tagname>
+	推送所有标签到远程：git push origin --tags
+	如果需要删除远程的标签：先删除本地标签：git tag -d v0.9，然后删除远程的：git push origin :refs/tags/v0.9
 
 
