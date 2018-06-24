@@ -77,7 +77,7 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 	git checkout mydev
 2、使用git branch命令查看目前有多少分支，目前工作区处于哪个分支，当前分支前面会标一个*号
 3、切换回主分支：git checkout master
-4、把mydev分支合并到主分支：git merge mydev
+4、把mydev分支合并到主分支：git merge mydev	(这种方法使用的是Fast forward模式，在这种模式下删除分支后就会丢掉分支信息，以后就看不到什么时候有分支的合并。所以可以使用禁止Fast forward的模式，git就会在merge的同时新生成一个commit，使用方法：git merge --no-ff -m "这里是提交的内容说明" mydev)
 5、删除分支：git branch -d mydev
 
 6、分支冲突：在分支上修改内容并add和commit之后，把分支切换到master上，然后同样的add和commit后，提交当分支上的同一个文件的内容与主分支上的内容不一样的时候，合并分支会产生冲突而导致无法合并。这个时候，需要手动修改有冲突的文件，然后在master上重新的add和commit之后再进行合并（git merge mydev）。
@@ -106,4 +106,27 @@ Unpacking objects: 100% (3/3), done.
 5、这是在windows下的mydev2分支
 >>>>>>> 99979c1a63e9b9d4034a6a7a52b1f42054d6c765}，修改冲突为，可以修改例如这样的：{5、这是在ubuntu下的mydev3分支
 5、这是在windows下的mydev2分支}，然后再add、commit和push。
+
+*********************************************************
+	git bug分支管理
+*********************************************************
+1、这种情况是在代码的开发中，发现master上有bug，但是目前我正在mydev分支上进行代码开发。我不能再在master分支上创建一个临时的分支修改了再合并，因为这样可能会导致到时候合并mydev分支的时候有冲突。正确做法应该是先把当前的工作现场mydev储藏(stash)起来，然后再在master上创建临时分支然后修改bug再合并到master上。之后就可以恢复储藏的现场继续mydev上的工作了。
+	1、目前你正在dev的分支上面工作，突然发现master上面有bug，首先进行储藏当前现场：git stash，此时git status查看状态是干净的。然后赶紧切换回来到master上，在master上查看git status也是干净的。
+	2、在master上创建一个临时的分支：git checkout -b issue-01,
+	3、在issue-01上修复bug。
+	4、然后add、commit、merge。
+		git add testgitmerga.txt
+		git commit -m "添加测试修复的bug"
+		git checkout master
+		git merge --no-ff -m "和bug分支进行合 并" issue-01
+		git branch -d issue-01
+	5、切换回dev分支继续工作：
+		git checkout dev
+		git stash list(查看工作现场)
+		git stash pop（恢复的同时把stash内容也删了，或者git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除）
+		也可以使用git status进行多次隐藏工作现场，然后使用git stash list查看有多少个隐藏的现场，然后使用git stash apply stash@{0}指定恢复到哪一个现场。最后使用git stash drop命令来删除不需要的现场
+
+
+
+
 
