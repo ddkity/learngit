@@ -179,4 +179,4 @@ Unpacking objects: 100% (3/3), done.
 	推送所有标签到远程：git push origin --tags
 	如果需要删除远程的标签：先删除本地标签：git tag -d v0.9，然后删除远程的：git push origin :refs/tags/v0.9
 
-
+test
